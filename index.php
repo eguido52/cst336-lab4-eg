@@ -5,7 +5,8 @@
     {    
         include 'api/pixabayAPI.php';
         $keyword = $_GET['keyword'];
-        $imageURLs = getImageURLs($keyword);
+        $layout = $_GET['layout'];
+        $imageURLs = getImageURLs($keyword, $layout);
         $backgroundImage = $imageURLs[array_rand($imageURLs)];
     }
    
@@ -16,7 +17,7 @@
     <head>
         <meta charset= "utf-8" />
         <title>Image Carousel</title>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <style>
             @import url("css/styles.css");
             body{
@@ -27,6 +28,25 @@
     
     <body>
         <br/>
+        <form>
+            <input type="text" name="keyword" placeholder= "keyword" value="<?=$_GET['keyword']?>"/>
+            <br/><br/>
+            <input type="radio" id="lhorizontal" name="layout" value="horizontal"/>
+            <label for="Horizontal"></label><label for="lhorizontal"> Horizontal </label><br/>
+            <input type="radio" id="lvertical" name="layout" value="vertical"/>
+            <label for="Vertical"></label><label for="lvertical">Vertical </label>
+            <br/><br/>
+            <select name="keyword" >
+                 <option value="" >- Select One -</option>
+                 <option value="dogs"> Dogs </option>
+                 <option value="cats"> Cats </option>
+                 <option value="rabbits"> Rabbits </option>
+                 <option value="otters"> Otters </option>
+                 <option value="pandas"> Pandas </option>
+            </select><br/><br/>
+            <input type="submit" value="Search"/>
+        </form>
+        <br/><br/>
         
         <?php
             if(!isset($imageURLs))
@@ -36,7 +56,7 @@
             else 
             {
         ?>
-        <div id= "carousel-example-generic" class= "carousel slide" data-ride= "carousel">
+        <div id= "carousel-example-generic" class= "carousel slide" data-ride= "carousel" style='width:300px'>
             
             <ol class="carousel-indicators">
                 <?php
@@ -81,30 +101,9 @@
             }//end else
         ?>
         <br>
-        <form>
-            <input type="text" name="keyword" placeholder= "keyword" value="<?=$_GET['keyword']?>"/>
-            <br/><br/>
-            <!--<div id="imageLayout">-->
-            <input type="radio" id="lhorizontal" name="layout" value="horizontal"/>
-            <label for="Horizontal"></label><label for="lhorizontal"> Horizontal </label><br/>
-            <input type="radio" id="lvertical" name="layout" value="vertical"/>
-            <label for="Vertical"></label><label for="lvertical">Vertical </label><br/>
-            <!--</div>-->
-            <br />
-            <select name="category">
-                 <option value="">- Select One -</option>
-                 <option > Dogs </option>
-                 <option > Cats </option>
-                 <option > Rabbits </option>
-                 <option > Otters </option>
-                 <option > Pandas </option>
-            </select><br/><br/>
-            <input type="submit" value="Search"/>
-        </form>
         
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>        
     </body>
     
     <footer>
