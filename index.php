@@ -1,13 +1,24 @@
 <?php
      $backgroundImage = "img/sea.jpg";
      
+     include 'api/pixabayAPI.php';
     if(isset($_GET['keyword']))
     {    
-        include 'api/pixabayAPI.php';
         $keyword = $_GET['keyword'];
         $layout = $_GET['layout'];
         $imageURLs = getImageURLs($keyword, $layout);
         $backgroundImage = $imageURLs[array_rand($imageURLs)];
+    }
+    if(isset($_GET['category']) && $_GET['category']!="")
+    {    
+        $keyword = $_GET['category'];
+        $layout = $_GET['layout'];
+        $imageURLs = getImageURLs($keyword, $layout);
+        $backgroundImage = $imageURLs[array_rand($imageURLs)];
+    }
+    if(!isset($_GET['keyword']) && !isset($_GET['category']))
+    {
+        $backgroundImage = "img/sea.jpg";
     }
    
 ?>
@@ -36,8 +47,8 @@
             <input type="radio" id="lvertical" name="layout" value="vertical"/>
             <label for="Vertical"></label><label for="lvertical">Vertical </label>
             <br/><br/>
-            <select name="keyword" >
-                 <option value="" >- Select One -</option>
+            <select name="category" >
+                 <option value="">- Select One -</option>
                  <option value="dogs"> Dogs </option>
                  <option value="cats"> Cats </option>
                  <option value="rabbits"> Rabbits </option>
